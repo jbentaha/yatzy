@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ScoringOperationsTest {
+public class CalculatorTest {
 
   private final CalculatorFactory calculatorFactory = new CalculatorFactory(new ScoringOperations());
 
