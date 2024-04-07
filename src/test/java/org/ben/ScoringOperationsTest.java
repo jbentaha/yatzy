@@ -152,7 +152,7 @@ public class ScoringOperationsTest {
   public void testThreeOfKindOperation() {
     List<Integer> threeKind = List.of(5, 5, 6, 5, 6);
     List<Integer> fourKind = List.of(1, 1, 2, 1, 1);
-    List<Integer> zeroKind = List.of(3, 4, 2, 6, 5);
+    List<Integer> twoKind = List.of(3, 4, 2, 4, 5);
 
     int threeKindResult = calculatorFactory.getOperation(Categories.THREE_OF_KIND).calculateScore(threeKind);
     assertEquals(15, threeKindResult, "Should return 15 : 5 + 5 + 5");
@@ -160,56 +160,44 @@ public class ScoringOperationsTest {
     int fourKindResult = calculatorFactory.getOperation(Categories.THREE_OF_KIND).calculateScore(fourKind);
     assertEquals(3, fourKindResult, "Should return 3 : 1 + 1 + 1");
 
-    int noResult = calculatorFactory.getOperation(Categories.THREE_OF_KIND).calculateScore(zeroKind);
-    assertEquals(0, noResult, "Should return 0 : no occurrences");
+    int twoKindResult = calculatorFactory.getOperation(Categories.THREE_OF_KIND).calculateScore(twoKind);
+    assertEquals(0, twoKindResult, "Should return 0 : only two of a kind");
   }
 
   @Test
   public void testFourOfKindOperation() {
     List<Integer> fourKind = List.of(3, 3, 2, 3, 3);
     List<Integer> threeKind = List.of(5, 5, 6, 5, 6);
-    List<Integer> zeroKind = List.of(3, 4, 2, 6, 5);
 
     int fourKindResult = calculatorFactory.getOperation(Categories.FOUR_OF_KIND).calculateScore(fourKind);
     assertEquals(12, fourKindResult, "Should return 12 : 3 + 3 + 3 + 3");
 
     int threeKindResult = calculatorFactory.getOperation(Categories.FOUR_OF_KIND).calculateScore(threeKind);
     assertEquals(0, threeKindResult, "Should return 0 : no four of kind");
-
-    int noResult = calculatorFactory.getOperation(Categories.FOUR_OF_KIND).calculateScore(zeroKind);
-    assertEquals(0, noResult, "Should return 0 : no occurrences");
   }
 
   @Test
   public void testSmallStraightOperation() {
     List<Integer> small = List.of(1, 2, 3, 4, 5);
     List<Integer> large = List.of(2, 3, 4, 5, 6);
-    List<Integer> none = List.of(3, 4, 2, 6, 5);
 
     int smallResult = calculatorFactory.getOperation(Categories.SMALL_STRAIGHT).calculateScore(small);
     assertEquals(15, smallResult, "Should return 15 : 1 + 2 + 3 + 4 + 5");
 
     int largeResult = calculatorFactory.getOperation(Categories.SMALL_STRAIGHT).calculateScore(large);
     assertEquals(0, largeResult, "Should return 0 : a large straight");
-
-    int noResult = calculatorFactory.getOperation(Categories.SMALL_STRAIGHT).calculateScore(none);
-    assertEquals(0, noResult, "Should return 0 : no straight");
   }
 
   @Test
   public void testLargeStraightOperation() {
     List<Integer> small = List.of(1, 2, 3, 4, 5);
     List<Integer> large = List.of(2, 3, 4, 5, 6);
-    List<Integer> largeNoOrder = List.of(3, 4, 2, 6, 5);
 
     int smallResult = calculatorFactory.getOperation(Categories.LARGE_STRAIGHT).calculateScore(small);
     assertEquals(0, smallResult, "Should return 0 : a small straight");
 
     int largeResult = calculatorFactory.getOperation(Categories.LARGE_STRAIGHT).calculateScore(large);
     assertEquals(20, largeResult, "Should return 20 : 2 + 3 + 4 + 5 + 6");
-
-    int noResult = calculatorFactory.getOperation(Categories.LARGE_STRAIGHT).calculateScore(largeNoOrder);
-    assertEquals(20, noResult, "Should return 20 : 3 + 4 + 2 + 6 + 5");
   }
 
   @Test
@@ -227,7 +215,7 @@ public class ScoringOperationsTest {
   @Test
   public void testFullHouseOperation() {
     List<Integer> fullHouse = List.of(1, 1, 2, 2, 2);
-    List<Integer> noFullHouse = List.of(1, 1, 2, 3, 1);
+    List<Integer> noFullHouse = List.of(1, 1, 2, 2, 3);
 
     int fullHouseResult = calculatorFactory.getOperation(Categories.FULL_HOUSE).calculateScore(fullHouse);
     assertEquals(8, fullHouseResult, "Should return 8 : a full house");

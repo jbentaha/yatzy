@@ -132,10 +132,9 @@ public class ScoringOperations {
     private final ScoringOperation smallStraight = diceValues -> {
         Set<Integer> uniqueValues = new HashSet<>(diceValues);
 
-        int maxValue = uniqueValues.stream().mapToInt(Integer::intValue).max().getAsInt();
         int minValue = uniqueValues.stream().mapToInt(Integer::intValue).min().getAsInt();
 
-        if (uniqueValues.size() == 5 && maxValue == 5 && minValue == 1) {
+        if (uniqueValues.size() == 5 && minValue == 1) {
             return 15;
         }
 
@@ -148,10 +147,9 @@ public class ScoringOperations {
     private final ScoringOperation largeStraight = diceValues -> {
         Set<Integer> uniqueValues = new HashSet<>(diceValues);
 
-        int maxValue = uniqueValues.stream().mapToInt(Integer::intValue).max().getAsInt();
         int minValue = uniqueValues.stream().mapToInt(Integer::intValue).min().getAsInt();
 
-        if (uniqueValues.size() == 5 && maxValue == 6 && minValue == 2) {
+        if (uniqueValues.size() == 5 && minValue == 2) {
             return 20;
         }
 
