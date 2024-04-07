@@ -13,63 +13,63 @@ public class CalculatorFactory {
     public ScoringOperation getOperation(Categories category) {
         switch (category) {
             case CHANCE -> {
-                return scoringOperations.getChanceOperation();
+                return scoringOperations.getChance();
             }
 
             case YATZY -> {
-                return scoringOperations.getYatzyOperation();
+                return scoringOperations.getYatzy();
             }
 
             case ONES ->{
-                return scoringOperations.getOnesOperation();
+                return scoringOperations.getOnes();
             }
 
             case TWOS -> {
-                return scoringOperations.getTwosOperation();
+                return scoringOperations.getTwos();
             }
 
             case THREES -> {
-                return scoringOperations.getThreesOperation();
+                return scoringOperations.getThrees();
             }
 
             case FOURS -> {
-                return scoringOperations.getFoursOperation();
+                return scoringOperations.getFours();
             }
 
             case FIVES -> {
-                return scoringOperations.getFivesOperation();
+                return scoringOperations.getFives();
             }
 
             case SIXES -> {
-                return scoringOperations.getSixesOperation();
+                return scoringOperations.getSixes();
             }
 
             case PAIR -> {
-                return scoringOperations.getPairOperation();
+                return scoringOperations.getPair();
             }
 
             case TWO_PAIRS -> {
-                return scoringOperations.getTwoPairOperation();
+                return scoringOperations.getTwoPair();
             }
 
             case THREE_OF_KIND -> {
-                return scoringOperations.getThreeOfKindOperation();
+                return scoringOperations.getThreeOfKind();
             }
 
-            case FOUR_OF_KINd -> {
-                return scoringOperations.getFourOfKindOperation();
+            case FOUR_OF_KIND -> {
+                return scoringOperations.getFourOfKind();
             }
 
             case SMALL_STRAIGHT -> {
-                return scoringOperations.getSmallStraightOperation();
+                return scoringOperations.getSmallStraight();
             }
 
             case LARGE_STRAIGHT -> {
-                return scoringOperations.getLargeStraightOperation();
+                return scoringOperations.getLargeStraight();
             }
 
             case FULL_HOUSE -> {
-                return scoringOperations.getFullHouseOperation();
+                return scoringOperations.getFullHouse();
             }
 
             default -> {

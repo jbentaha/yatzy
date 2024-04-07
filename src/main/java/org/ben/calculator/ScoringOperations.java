@@ -5,63 +5,68 @@ import lombok.Getter;
 @Getter
 public class ScoringOperations {
 
-    private final ScoringOperation fullHouseOperation = diceValues -> {
+    private final ScoringOperation ones = diceValues -> (int) diceValues.stream()
+            .filter(dice -> dice == 1)
+            .count();
+
+    private final ScoringOperation twos = diceValues -> diceValues.stream()
+            .filter(dice -> dice == 2)
+            .mapToInt(Integer::intValue)
+            .sum();
+
+    private final ScoringOperation threes = diceValues -> diceValues.stream()
+            .filter(dice -> dice == 3)
+            .mapToInt(Integer::intValue)
+            .sum();
+
+    private final ScoringOperation fours = diceValues -> diceValues.stream()
+            .filter(dice -> dice == 4)
+            .mapToInt(Integer::intValue)
+            .sum();
+
+    private final ScoringOperation fives = diceValues -> diceValues.stream()
+            .filter(dice -> dice == 5)
+            .mapToInt(Integer::intValue)
+            .sum();
+
+    private final ScoringOperation sixes = diceValues -> diceValues.stream()
+            .filter(dice -> dice == 6)
+            .mapToInt(Integer::intValue)
+            .sum();
+
+    private final ScoringOperation chance = diceValues -> {
         return 0;
     };
 
-    private final ScoringOperation yatzyOperation = diceValues -> {
+    private final ScoringOperation pair = diceValues -> {
         return 0;
     };
 
-    private final ScoringOperation chanceOperation = diceValues -> {
+    private final ScoringOperation twoPair = diceValues -> {
         return 0;
     };
 
-    private final ScoringOperation onesOperation = diceValues -> {
+    private final ScoringOperation threeOfKind = diceValues -> {
         return 0;
     };
 
-    private final ScoringOperation twosOperation = diceValues -> {
+    private final ScoringOperation fourOfKind = diceValues -> {
         return 0;
     };
 
-    private final ScoringOperation threesOperation = diceValues -> {
+    private final ScoringOperation smallStraight = diceValues -> {
         return 0;
     };
 
-    private final ScoringOperation foursOperation = diceValues -> {
+    private final ScoringOperation largeStraight = diceValues -> {
         return 0;
     };
 
-    private final ScoringOperation fivesOperation = diceValues -> {
+    private final ScoringOperation yatzy = diceValues -> {
         return 0;
     };
 
-    private final ScoringOperation sixesOperation = diceValues -> {
-        return 0;
-    };
-
-    private final ScoringOperation pairOperation = diceValues -> {
-        return 0;
-    };
-
-    private final ScoringOperation twoPairOperation = diceValues -> {
-        return 0;
-    };
-
-    private final ScoringOperation threeOfKindOperation = diceValues -> {
-        return 0;
-    };
-
-    private final ScoringOperation fourOfKindOperation = diceValues -> {
-        return 0;
-    };
-
-    private final ScoringOperation smallStraightOperation = diceValues -> {
-        return 0;
-    };
-
-    private final ScoringOperation largeStraightOperation = diceValues -> {
+    private final ScoringOperation fullHouse = diceValues -> {
         return 0;
     };
 
