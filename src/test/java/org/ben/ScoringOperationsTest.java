@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ScoringOperationsTest {
 
-  private CalculatorFactory calculatorFactory = new CalculatorFactory(new ScoringOperations());
+  private final CalculatorFactory calculatorFactory = new CalculatorFactory(new ScoringOperations());
 
   @Test
   public void testOnesOperation() {
@@ -227,7 +227,7 @@ public class ScoringOperationsTest {
   @Test
   public void testFullHouseOperation() {
     List<Integer> fullHouse = List.of(1, 1, 2, 2, 2);
-    List<Integer> noFullHouse = List.of(1, 1, 2, 1, 1);
+    List<Integer> noFullHouse = List.of(1, 1, 2, 3, 1);
 
     int fullHouseResult = calculatorFactory.getOperation(Categories.FULL_HOUSE).calculateScore(fullHouse);
     assertEquals(8, fullHouseResult, "Should return 8 : a full house");

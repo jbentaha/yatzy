@@ -20,7 +20,7 @@ public class CalculatorFactory {
                 return scoringOperations.getYatzy();
             }
 
-            case ONES ->{
+            case ONES -> {
                 return scoringOperations.getOnes();
             }
 

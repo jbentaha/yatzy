@@ -3,46 +3,69 @@ package org.ben.calculator;
 import lombok.Getter;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Getter
 public class ScoringOperations {
 
+    /**
+     * return only the sum of ones
+     */
     private final ScoringOperation ones = diceValues -> (int) diceValues.stream()
             .filter(dice -> dice == 1)
             .count();
 
+    /**
+     * return only the sum of twos
+     */
     private final ScoringOperation twos = diceValues -> diceValues.stream()
             .filter(dice -> dice == 2)
             .mapToInt(Integer::intValue)
             .sum();
 
+    /**
+     * return only the sum of threes
+     */
     private final ScoringOperation threes = diceValues -> diceValues.stream()
             .filter(dice -> dice == 3)
             .mapToInt(Integer::intValue)
             .sum();
 
+    /**
+     * return only the sum of fours
+     */
     private final ScoringOperation fours = diceValues -> diceValues.stream()
             .filter(dice -> dice == 4)
             .mapToInt(Integer::intValue)
             .sum();
 
+    /**
+     * return only the sum of fives
+     */
     private final ScoringOperation fives = diceValues -> diceValues.stream()
             .filter(dice -> dice == 5)
             .mapToInt(Integer::intValue)
             .sum();
 
+    /**
+     * return only the sum of sixes
+     */
     private final ScoringOperation sixes = diceValues -> diceValues.stream()
             .filter(dice -> dice == 6)
             .mapToInt(Integer::intValue)
             .sum();
 
+    /**
+     * return the sum of all dices
+     */
     private final ScoringOperation chance = diceValues -> diceValues.stream()
                 .mapToInt(Integer::intValue)
                 .sum();
 
+    /**
+     * return the sum of first two matching dices, otherwise 0
+     */
     private final ScoringOperation pair = diceValues -> {
         int[] counts = new int[6];
         diceValues.forEach(dice -> counts[dice - 1]++);
@@ -54,6 +77,9 @@ public class ScoringOperations {
         return pairIndex.isPresent() ? (6 - pairIndex.getAsInt()) * 2 : 0;
     };
 
+    /**
+     * return the sum of the two pairs of dice with the same number, otherwise 0
+     */
     private final ScoringOperation twoPair = diceValues -> {
         int[] counts = new int[6];
         diceValues.forEach(die -> counts[die - 1]++);
@@ -72,6 +98,9 @@ public class ScoringOperations {
         }
     };
 
+    /**
+     * return if exists, the sum of three dices with same number, otherwise 0
+     */
     private final ScoringOperation threeOfKind = diceValues -> {
         int[] counts = new int[6];
         diceValues.forEach(die -> counts[die - 1]++);
@@ -83,6 +112,9 @@ public class ScoringOperations {
                 .orElse(0);
     };
 
+    /**
+     * return if exists, the sum of four dices with same number, otherwise 0
+     */
     private final ScoringOperation fourOfKind = diceValues -> {
         int[] counts = new int[6];
         diceValues.forEach(die -> counts[die - 1]++);
@@ -94,42 +126,52 @@ public class ScoringOperations {
                 .orElse(0);
     };
 
+    /**
+     * return the sum of straight dices starting from 1 (1,2,3,4,5), otherwise 0
+     */
     private final ScoringOperation smallStraight = diceValues -> {
         Set<Integer> uniqueValues = new HashSet<>(diceValues);
 
         int maxValue = uniqueValues.stream().mapToInt(Integer::intValue).max().getAsInt();
         int minValue = uniqueValues.stream().mapToInt(Integer::intValue).min().getAsInt();
 
-        if (uniqueValues.size() == 5 && maxValue - minValue == 4 && maxValue == 5 && minValue == 1) {
+        if (uniqueValues.size() == 5 && maxValue == 5 && minValue == 1) {
             return 15;
         }
 
         return 0;
     };
 
+    /**
+     * return the sum of straight dices starting from 2 (2,3,4,5,6), otherwise 0
+     */
     private final ScoringOperation largeStraight = diceValues -> {
         Set<Integer> uniqueValues = new HashSet<>(diceValues);
 
         int maxValue = uniqueValues.stream().mapToInt(Integer::intValue).max().getAsInt();
         int minValue = uniqueValues.stream().mapToInt(Integer::intValue).min().getAsInt();
 
-        if (uniqueValues.size() == 5 && maxValue - minValue == 4 && maxValue == 6 && minValue == 2) {
+        if (uniqueValues.size() == 5 && maxValue == 6 && minValue == 2) {
             return 20;
         }
 
         return 0;
     };
 
+    /**
+     * return 50 if all dices have the same value, otherwise 0
+     */
     private final ScoringOperation yatzy = diceValues -> {
-        // Count occurrences of each dice value
         int[] counts = new int[6];
         diceValues.forEach(die -> counts[die - 1]++);
 
-        // Check if any value appears 5 times
         return IntStream.of(counts)
                 .anyMatch(count -> count == 5) ? 50 : 0;
     };
 
+    /**
+     * return the sum of all dices if they are two of a kind and three of a kind
+     */
     private final ScoringOperation fullHouse = diceValues -> {
         Map<Integer, Long> counts = diceValues.stream()
                 .collect(Collectors.groupingBy(Integer::intValue, Collectors.counting()));
