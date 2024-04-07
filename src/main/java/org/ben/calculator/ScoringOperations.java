@@ -12,9 +12,10 @@ public class ScoringOperations {
     /**
      * return only the sum of ones
      */
-    private final ScoringOperation ones = diceValues -> (int) diceValues.stream()
+    private final ScoringOperation ones = diceValues -> diceValues.stream()
             .filter(dice -> dice == 1)
-            .count();
+            .mapToInt(Integer::intValue)
+            .sum();
 
     /**
      * return only the sum of twos
